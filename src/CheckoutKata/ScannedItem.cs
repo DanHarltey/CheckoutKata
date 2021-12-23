@@ -8,9 +8,12 @@
             Quantity = quantity;
         }
 
+        public ScannedItem(IScannedItem scannedItem)
+            : this(scannedItem.Item, scannedItem.Quantity)
+        {
+        }
+
         public Item Item { get; private init; }
         public uint Quantity { get; set; }
-
-        public decimal TotalUnitPrice => Item.UnitPrice * Quantity;
     }
 }

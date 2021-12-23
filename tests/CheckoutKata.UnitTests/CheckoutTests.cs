@@ -112,32 +112,6 @@ namespace CheckoutKata.UnitTests
             Assert.Equal(Sku2Price, sku2Item.Item.UnitPrice);
             Assert.Equal(1u, sku2Item.Quantity);
         }
-
-        [Fact]
-        public void WhenSkuScannedThenTotalPriceIsCalculated()
-        {
-            // Arrange
-            const string Sku1 = "A99";
-            const decimal Sku1Price = 1m;
-
-            const string Sku2 = "B15";
-            const decimal Sku2Price = 500m;
-
-            ICheckout checkout = new Checkout(new Item[]
-            {
-                new Item(Sku1, Sku1Price),
-                new Item(Sku2, Sku2Price)
-            });
-
-            // Act
-            checkout.Scan(Sku1);
-            checkout.Scan(Sku2);
-            checkout.Scan(Sku1);
-
-            // Assert
-            var totalPrice = checkout.TotalPrice;
-            Assert.Equal(502, totalPrice);
-        }
     }
 }
 

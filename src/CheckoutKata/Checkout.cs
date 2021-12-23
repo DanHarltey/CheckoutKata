@@ -1,6 +1,8 @@
-﻿namespace CheckoutKata
+﻿using CheckoutKata.Pricing;
+
+namespace CheckoutKata
 {
-    public class Checkout : ICheckout
+    internal class Checkout : ICheckout
     {
         private readonly IReadOnlyDictionary<string, Item> _items;
         private readonly Dictionary<Item, ScannedItem> _scannedItems;
@@ -10,8 +12,6 @@
             _items = items.ToDictionary(x => x.Sku);
             _scannedItems = new();
         }
-
-        public decimal TotalPrice => _scannedItems.Sum(x => x.Value.TotalUnitPrice);
 
         public IEnumerable<IScannedItem> ScannedItems => _scannedItems.Values;
 
