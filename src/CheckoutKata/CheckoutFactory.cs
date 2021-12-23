@@ -2,8 +2,6 @@
 {
     public static class CheckoutFactory
     {
-
-
         public static ICheckout Create()
         {
             var itemsQuery = new ItemsQuery();

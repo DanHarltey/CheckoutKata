@@ -3,15 +3,15 @@
     public class Checkout : ICheckout
     {
         private readonly IReadOnlyDictionary<string, Item> _items;
-        private readonly List<Item> _scannedItems;
+        private readonly Dictionary<Item, ScannedItem> _scannedItems;
 
         public Checkout(IEnumerable<Item> items)
         {
             _items = items.ToDictionary(x => x.Sku);
-            _scannedItems = new List<Item>();
+            _scannedItems = new();
         }
 
-        public IEnumerable<Item> ScannedItems => _scannedItems.AsReadOnly();
+        public IEnumerable<IScannedItem> ScannedItems => _scannedItems.Values;
 
         public void Scan(string sku)
         {
@@ -22,7 +22,14 @@
                 throw new ArgumentException("Could not find passed Sku", nameof(sku));
             }
 
-            _scannedItems.Add(item);
+            if (_scannedItems.TryGetValue(item, out var scannedItem))
+            {
+                ++scannedItem.Quantity;
+            }
+            else
+            {
+                _scannedItems.Add(item, new ScannedItem(item, 1));
+            }
         }
     }
 }
