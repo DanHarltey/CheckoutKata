@@ -10,5 +10,7 @@
 
         public Item Item { get; private init; }
         public uint Quantity { get; set; }
+
+        public decimal TotalUnitPrice => Item.UnitPrice * Quantity;
     }
 }

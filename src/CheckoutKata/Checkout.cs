@@ -11,13 +11,15 @@
             _scannedItems = new();
         }
 
+        public decimal TotalPrice => _scannedItems.Sum(x => x.Value.TotalUnitPrice);
+
         public IEnumerable<IScannedItem> ScannedItems => _scannedItems.Values;
 
         public void Scan(string sku)
         {
             ArgumentNullException.ThrowIfNull(sku);
 
-            if(!_items.TryGetValue(sku, out var item))
+            if (!_items.TryGetValue(sku, out var item))
             {
                 throw new ArgumentException("Could not find passed Sku", nameof(sku));
             }

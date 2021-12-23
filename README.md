@@ -28,12 +28,12 @@ Manage your time effectively to progress through the main points, do not get dis
 Please push your work to a remote git repository (e.g. GitHub) and share the location and any required credentials with us. Commit as you go to show your working process, rather than just one big commit at the end. If you can’t share a public repository, please zip the local git repository and send that so we can still see your commits.
 Work your way through this checklist:
 1. Create a new solution
-  1. Include a class library for the logic
-  2. Include a test library for unit tests (feel free to use whatever test library you are most comfortable with)
+   1. Include a class library for the logic
+   2. Include a test library for unit tests (feel free to use whatever test library you are most comfortable with)
 2. Prove you can scan an item at a checkout
 3. Prove you can request the total price
 4. Introduce special offers
-  1. Amend your prior implementation to consider offers on items
+   1. Amend your prior implementation to consider offers on items
 5. Prove you can request the total price inclusive of offers
 
 This kata covers just the middleware, do not be concerned with UI or data access.

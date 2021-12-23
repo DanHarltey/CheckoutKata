@@ -86,7 +86,7 @@ namespace CheckoutKata.UnitTests
             const decimal Sku2Price = 500m;
 
             ICheckout checkout = new Checkout(new Item[]
-            { 
+            {
                 new Item(Sku1, Sku1Price),
                 new Item(Sku2, Sku2Price)
             });
@@ -99,8 +99,8 @@ namespace CheckoutKata.UnitTests
             // Assert
             var scannedItems = checkout.ScannedItems.ToList();
             Assert.Equal(2, scannedItems.Count);
-            
-            var sku1Item = scannedItems.Single(x=> x.Item.Sku == Sku1);
+
+            var sku1Item = scannedItems.Single(x => x.Item.Sku == Sku1);
             Assert.NotNull(sku1Item);
             Assert.Equal(Sku1, sku1Item.Item.Sku);
             Assert.Equal(Sku1Price, sku1Item.Item.UnitPrice);
@@ -111,6 +111,32 @@ namespace CheckoutKata.UnitTests
             Assert.Equal(Sku2, sku2Item.Item.Sku);
             Assert.Equal(Sku2Price, sku2Item.Item.UnitPrice);
             Assert.Equal(1u, sku2Item.Quantity);
+        }
+
+        [Fact]
+        public void WhenSkuScannedThenTotalPriceIsCalculated()
+        {
+            // Arrange
+            const string Sku1 = "A99";
+            const decimal Sku1Price = 1m;
+
+            const string Sku2 = "B15";
+            const decimal Sku2Price = 500m;
+
+            ICheckout checkout = new Checkout(new Item[]
+            {
+                new Item(Sku1, Sku1Price),
+                new Item(Sku2, Sku2Price)
+            });
+
+            // Act
+            checkout.Scan(Sku1);
+            checkout.Scan(Sku2);
+            checkout.Scan(Sku1);
+
+            // Assert
+            var totalPrice = checkout.TotalPrice;
+            Assert.Equal(502, totalPrice);
         }
     }
 }
